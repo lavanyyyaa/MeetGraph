@@ -1,0 +1,1 @@
+Riya will complete the UI by Friday. However, she cannot finish it until Arjun completes the API integration. Arjun is waiting for the database team to finalize the schema by Wednesday. Testing will begin once the UI and API are ready.

@@ -1,0 +1,9 @@
+Sprint Planning Meeting Transcript - E-Commerce Platform
+
+Sarah will build the user authentication microservice by Tuesday.
+Liam will implement the payment webhook handler by Thursday.
+Liam cannot finish the payment webhook handler until Sarah completes the user authentication microservice.
+Riya will complete the frontend checkout interface by Friday.
+However, she cannot finish it until Liam completes the payment webhook handler.
+QA Team is waiting for the frontend checkout interface to begin end-to-end integration tests.
+Deployment will commence once the integration tests and payment webhook handler are ready.

@@ -1,0 +1,68 @@
+{
+  "dataset_type": "Synthetic meeting dependency benchmark (zero-leakage split across disjoint meeting graphs)",
+  "dataset_stats": {
+    "num_train_graphs": 80,
+    "num_val_graphs": 25,
+    "num_test_graphs": 25,
+    "num_train_nodes": 608,
+    "num_val_nodes": 211,
+    "num_test_nodes": 179,
+    "feature_dim": 10,
+    "feature_names": [
+      "Status: TODO",
+      "Status: IN_PROGRESS",
+      "Status: BLOCKED",
+      "Status: COMPLETED",
+      "Deadline Proximity",
+      "Has Deadline Flag",
+      "Explicit Blocker Flag",
+      "Base Duration",
+      "Downstream Dependents (In-Degree)",
+      "Upstream Prerequisites (Out-Degree)"
+    ],
+    "train_test_split_strategy": "Disjoint meeting graphs partitioned randomly with fixed seed (42). No node from a test meeting appears in the training or validation sets."
+  },
+  "research_question": "Can graph representation learning improve task-risk classification by incorporating task dependencies and neighbouring task information, compared with models that consider each task independently?",
+  "gnn_metrics": {
+    "model_name": "GraphSAGE (2-layer GNN with neighborhood message passing)",
+    "accuracy": 0.8770949720670391,
+    "precision": 0.8690476190476191,
+    "recall": 0.8690476190476191,
+    "f1_score": 0.8690476190476191,
+    "confusion_matrix": [
+      [
+        84,
+        11
+      ],
+      [
+        11,
+        73
+      ]
+    ]
+  },
+  "baseline_metrics": {
+    "model_name": "Logistic Regression (Isolated task-level features without dependency aggregation)",
+    "accuracy": 0.8212290502793296,
+    "precision": 0.782608695652174,
+    "recall": 0.8571428571428571,
+    "f1_score": 0.8181818181818182,
+    "confusion_matrix": [
+      [
+        75,
+        20
+      ],
+      [
+        12,
+        72
+      ]
+    ]
+  },
+  "conclusion": "The experimental results demonstrate that the GraphSAGE model achieves an F1-score of 0.869 compared to 0.818 for the non-graph baseline (Accuracy: 87.7% vs 82.1%). Because task risks frequently propagate along dependency chains (e.g., an upstream database bottleneck delaying an otherwise healthy downstream task), message passing across graph edges allows the GNN to capture non-local structural risk that independent task classifiers cannot observe.",
+  "limitations": [
+    "Evaluation was conducted on synthetic meeting graphs designed to emulate realistic enterprise dependency chains and cascading delays.",
+    "Real-world meeting transcripts often contain unstated or conversational assumptions that require richer commonsense reasoning.",
+    "GNN inference assumes the extracted dependency edges are accurate; extraction errors in upstream NLP will propagate into graph message passing.",
+    "The model provides a probabilistic risk indicator ('Potentially at risk') rather than a deterministic guarantee of delay."
+  ],
+  "is_trained": true
+}
